@@ -2,13 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "../../Button";
 
-const TableRow = ({ data, destroyPoll, updatePoll }) => {
+const TableRow = ({ data, destroyPoll, updatePoll, showPoll }) => {
   return (
     <tbody className="bg-white divide-y divide-gray-200">
       {data.map(rowData => (
         <tr key={rowData.title}>
-          <td className="px-6 py-4 text-sm font-medium
-            leading-5 text-bb-gray whitespace-no-wrap">
+          <td 
+            className="px-6 py-4 text-sm font-medium
+            leading-5 text-bb-gray whitespace-no-wrap"
+            onClick={() => showPoll(rowData.slug)}
+          >
             {rowData.title}
           </td>
           <td className="px-6 py-4 text-sm font-medium
@@ -17,6 +20,7 @@ const TableRow = ({ data, destroyPoll, updatePoll }) => {
               hover:text-opacity-100">
               <Button
                 buttonText="Edit"
+                onClick={() => updatePoll(rowData.slug)}
               />
             </a>
           </td>
@@ -25,6 +29,7 @@ const TableRow = ({ data, destroyPoll, updatePoll }) => {
             <a className=" hover:text-bb-red">
               <Button
                 buttonText="Delete"
+                onClick={() => destroyPoll(rowData.slug)}
               />
             </a>
           </td>

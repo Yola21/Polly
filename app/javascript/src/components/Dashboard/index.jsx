@@ -22,6 +22,23 @@ const Dashboard = ({ history }) => {
     }
   };
 
+  const showPoll = slug => {
+    history.push(`/polls/${slug}/show`);
+  };
+  
+  const destroyPoll = async slug => {
+    try {
+      await pollsApi.destroy(slug);
+      await fetchPolls();
+    } catch (error) {
+      Logger.error(error);
+    }
+  };
+
+  const updatePoll = slug => {
+    history.push(`/polls/${slug}/edit`);
+  };
+
   useEffect(() => {
     fetchPolls();
   }, []);
@@ -37,7 +54,12 @@ const Dashboard = ({ history }) => {
   if (!either(isNil, isEmpty)(polls)) {
     return (
       <Container>
-        <ListPolls data={polls} />
+        <ListPolls 
+          data={polls} 
+          showPoll={showPoll}
+          updatePoll={updatePoll}
+          destroyPoll={destroyPoll}
+        />
       </Container>
     );
   }
