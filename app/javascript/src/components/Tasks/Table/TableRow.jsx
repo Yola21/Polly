@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Button from "../../Button";
 
 const TableRow = ({ data, destroyPoll, updatePoll }) => {
   return (
@@ -14,12 +15,18 @@ const TableRow = ({ data, destroyPoll, updatePoll }) => {
             leading-5 text-right cursor-pointer">
             <a className="text-bb-purple text-opacity-50
               hover:text-opacity-100">
-              Edit
+              <Button
+                buttonText="Edit"
+              />
             </a>
           </td>
           <td className="px-6 py-4 text-sm font-medium
             leading-5 text-right cursor-pointer">
-            <a className=" hover:text-bb-red">Delete</a>
+            <a className=" hover:text-bb-red">
+              <Button
+                buttonText="Delete"
+              />
+            </a>
           </td>
         </tr>
       ))}
