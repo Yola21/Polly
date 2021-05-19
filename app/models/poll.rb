@@ -19,7 +19,7 @@ class Poll < ApplicationRecord
 
   def slug_not_changed
     if slug_changed? && self.persisted?
-      errors.add(:slug, t('task.slug.immutable'))
+      errors.add(:slug, t('poll.slug.immutable'))
     end
   end
 end

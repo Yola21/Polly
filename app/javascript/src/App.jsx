@@ -6,6 +6,7 @@ import CreatePoll from './components/Tasks/CreatePoll';
 import PageLoader from './components/PageLoader';
 import { ToastContainer } from 'react-toastify';
 import ShowPoll from './components/Tasks/ShowPoll';
+import EditPoll from './components/Tasks/EditPoll';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/" render={() => <div>Yola Yash this side!</div>} />
         <Route exact path="/polls/:slug/show" component={ShowPoll} />
         <Route exact path="/polls/create" component={CreatePoll} />
+        <Route exact path="/polls/:slug/edit" component={EditPoll} />
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
