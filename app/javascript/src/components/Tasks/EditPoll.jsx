@@ -5,7 +5,6 @@ import Container from "components/Container";
 import PollForm from "./Form/PollForm";
 import pollsApi from "apis/polls";
 import PageLoader from "components/PageLoader";
-import Toastr from "components/Common/Toastr";
 import Logger from 'js-logger';
 
 const EditPoll = ({ history }) => {
@@ -13,11 +12,12 @@ const EditPoll = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
+  const [userId, setUserId] = useState("");
  
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      await pollsApi.update({ slug, payload: { poll: { title } } });
+      await pollsApi.update({ slug, payload: { poll: { title, user_id: userId } } });
       setLoading(false);
       history.push("/dashboard");
     } catch (error) {
@@ -30,6 +30,7 @@ const EditPoll = ({ history }) => {
     try {
       const response = await pollsApi.show(slug);
       setTitle(response.data.poll.title);
+      setUserId(response.data.poll.user_id);
     } catch (error) {
       Logger.error(error);
     } finally {
