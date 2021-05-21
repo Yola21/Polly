@@ -19,7 +19,7 @@ const EditPoll = ({ history }) => {
     try {
       await pollsApi.update({ slug, payload: { poll: { title, user_id: userId } } });
       setLoading(false);
-      history.push("/dashboard");
+      history.push("/");
     } catch (error) {
       setLoading(false);
       Logger.error(error);

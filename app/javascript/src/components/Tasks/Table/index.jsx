@@ -1,9 +1,8 @@
 import React from "react";
-
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-const Table = ({ data, destroyPoll, updatePoll, showPoll }) => {
+const Table = ({ data, destroyPoll, updatePoll, showPoll }) => {    
   return (
     <div className="flex flex-col mt-10 ">
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
