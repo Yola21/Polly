@@ -12,8 +12,8 @@ const Input = ({
   return (
     <div className="mt-6">
       {label && (
-        <label className="block text-sm font-medium
-              leading-5 text-bb-gray-700">
+        <label className="block text-lg font-medium
+              leading-5 text-purple-700">
           {label}
         </label>
       )}

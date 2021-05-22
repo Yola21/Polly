@@ -25,19 +25,6 @@ const Dashboard = ({ history }) => {
   const showPoll = slug => {
     history.push(`/polls/${slug}/show`);
   };
-  
-  const destroyPoll = async slug => {
-    try {
-      await pollsApi.destroy(slug);
-      await fetchPolls();
-    } catch (error) {
-      Logger.error(error);
-    }
-  };
-
-  const updatePoll = slug => {
-    history.push(`/polls/${slug}/edit`);
-  };
 
   useEffect(() => {
     fetchPolls();
@@ -57,8 +44,6 @@ const Dashboard = ({ history }) => {
         <ListPolls 
           data={polls} 
           showPoll={showPoll}
-          updatePoll={updatePoll}
-          destroyPoll={destroyPoll}
         />
       </Container>
     );

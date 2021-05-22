@@ -48,9 +48,7 @@ class PollsController < ApplicationController
       render json: {errors: errors}
   end
 
-  private
-  
   def poll_params
-    params.require(:poll).permit(:title, :user_id)
+    params.require(:poll).permit(:title, :user_id, :option1, :option2, :option3, :option4)
   end
 end

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-
 import Container from "components/Container";
 import PageLoader from "components/PageLoader";
 import pollsApi from "apis/polls";
 import Logger from 'js-logger';
 
-const ShowPoll = () => {
+const ShowPoll = ({ history }) => {
   const { slug } = useParams();
   const [pollDetails, setPollDetails] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
@@ -21,6 +20,20 @@ const ShowPoll = () => {
       setPageLoading(false);
     }
   };
+  
+  const destroyPoll = async () => {
+    try {
+      await pollsApi.destroy(pollDetails?.slug);
+      await fetchPollDetails();
+      history.push('/');
+    } catch (error) {
+      Logger.error(error);
+    }
+  };
+
+  const updatePoll = () => {
+    history.push(`/polls/${pollDetails?.slug}/edit`);
+  };
 
   useEffect(() => {
     fetchPollDetails();
@@ -32,9 +45,29 @@ const ShowPoll = () => {
 
   return (
     <Container>
-      <h1 className="pb-3 pl-3 mt-3 mb-3 text-lg leading-5 text-bb-gray border-b border-bb-gray">
-        <span>Poll Title : </span> {pollDetails?.title}
-      </h1>
+      <div className="flex justify-between text-bb-gray-600 mt-10">
+        <div className="flex-1">
+          <h1 className="pb-3 pl-3 mt-3 mb-3 text-xl leading-5 text-purple-400 border-b border-bb-gray">
+            {pollDetails?.title}
+          </h1>
+          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option1}</button>
+          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option2}</button>
+          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option3}</button>
+          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option4}</button>
+        </div>
+        <div className="h-10 bg-bb-env px-2 mt-2 mb-4 ml-2 rounded">
+          <i
+            className="text-2xl text-center transition duration-300
+              ease-in-out ri-delete-bin-5-line hover:text-bb-red mr-2 cursor-pointer"
+            onClick={destroyPoll}
+          ></i>
+          <i
+            className="text-2xl text-center transition duration-300
+              ease-in-out ri-edit-line hover:text-bb-yellow cursor-pointer"
+            onClick={updatePoll}
+          ></i>
+        </div>
+      </div>
     </Container>
   );
 };
