@@ -14,6 +14,7 @@ const ShowPoll = ({ history }) => {
     try {
       const response = await pollsApi.show(slug);
       setPollDetails(response.data.poll);
+      console.log("Poll details", response);
     } catch (error) {
       Logger.error(error);
     }finally{
@@ -35,6 +36,12 @@ const ShowPoll = ({ history }) => {
     history.push(`/polls/${pollDetails?.slug}/edit`);
   };
 
+  const handleCalculateVotes = e => {
+    var option = e.target.innerText;
+    console.log(option);
+    console.log([pollDetails?.option1, pollDetails?.option2, pollDetails?.option3, pollDetails?.option4].includes(option));
+  };
+
   useEffect(() => {
     fetchPollDetails();
   }, []);
@@ -50,10 +57,30 @@ const ShowPoll = ({ history }) => {
           <h1 className="pb-3 pl-3 mt-3 mb-3 text-xl leading-5 text-purple-400 border-b border-bb-gray">
             {pollDetails?.title}
           </h1>
-          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option1}</button>
-          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option2}</button>
-          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option3}</button>
-          <button className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">{pollDetails?.option4}</button>
+          <button
+            className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+            onClick={handleCalculateVotes}
+          >
+            {pollDetails?.option1}
+          </button>
+          <button 
+            className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+            onClick={handleCalculateVotes}
+          >
+            {pollDetails?.option2}
+          </button>
+          <button 
+            className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+            onClick={handleCalculateVotes}
+          >
+            {pollDetails?.option3}
+          </button>
+          <button 
+            className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+            onClick={handleCalculateVotes}
+          >
+            {pollDetails?.option4}
+          </button>
         </div>
         <div className="h-10 bg-bb-env px-2 mt-2 mb-4 ml-2 rounded">
           <i
