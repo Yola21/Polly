@@ -4,6 +4,7 @@ import Container from "components/Container";
 import PageLoader from "components/PageLoader";
 import pollsApi from "apis/polls";
 import Logger from 'js-logger';
+import votesApi from "../../apis/votes";
 
 const ShowPoll = ({ history }) => {
   const { slug } = useParams();
@@ -36,10 +37,19 @@ const ShowPoll = ({ history }) => {
     history.push(`/polls/${pollDetails?.slug}/edit`);
   };
 
-  const handleCalculateVotes = e => {
+  const handleVotes = async e => {
+    e.preventDefault();
     var option = e.target.innerText;
     console.log(option);
     console.log([pollDetails?.option1, pollDetails?.option2, pollDetails?.option3, pollDetails?.option4].includes(option));
+    try{
+      await votesApi.create({ vote: { poll_id: pollDetails?.id, user_id: pollDetails?.user_id, option } });
+      setPageLoading(false);
+      fetchPollDetails();
+    } catch(error){
+      Logger.error(error);
+      setPageLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -59,25 +69,25 @@ const ShowPoll = ({ history }) => {
           </h1>
           <button
             className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
-            onClick={handleCalculateVotes}
+            onClick={handleVotes}
           >
             {pollDetails?.option1}
           </button>
           <button 
             className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
-            onClick={handleCalculateVotes}
+            onClick={handleVotes}
           >
             {pollDetails?.option2}
           </button>
           <button 
             className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
-            onClick={handleCalculateVotes}
+            onClick={handleVotes}
           >
             {pollDetails?.option3}
           </button>
           <button 
             className="my-4 p-2 w-3/4 text-l text-purple-600 font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
-            onClick={handleCalculateVotes}
+            onClick={handleVotes}
           >
             {pollDetails?.option4}
           </button>

@@ -1,14 +1,15 @@
 class PollsController < ApplicationController
   before_action :authenticate_user_using_x_auth_token
   before_action :load_poll, only: %i[show update destroy]
-  
+  before_action :load_votes, only: %i[show]
+
   def index
     polls = Poll.all
     render status: :ok, json: { polls: polls }
   end
 
   def show
-    render status: :ok, json: { poll: @poll }
+    render status: :ok, json: { poll: @poll, votes: @votes }
   end
 
   def create
@@ -50,5 +51,11 @@ class PollsController < ApplicationController
 
   def poll_params
     params.require(:poll).permit(:title, :user_id, :option1, :option2, :option3, :option4)
+  end
+
+  def load_votes
+    @votes = Vote.where(poll_id: @poll.id); 
+    rescue ActiveRecord::RecordNotFound => errors
+    render json: {errors: errors}
   end
 end
