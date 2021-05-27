@@ -21,7 +21,7 @@ const CreatePoll = ({ history }) => {
     try {
       await pollsApi.create({ poll: { title, option1, option2, option3, option4, user_id: userId } });
       setLoading(false);
-      history.push("/dashboard");
+      history.push("/");
     } catch (error) {
       Logger.error(error);
       setLoading(false);

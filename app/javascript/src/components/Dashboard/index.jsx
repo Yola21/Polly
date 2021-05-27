@@ -6,10 +6,13 @@ import PageLoader from "components/PageLoader";
 import pollsApi from "apis/polls";
 import Logger from 'js-logger';
 import TableHeader from "../Tasks/Table/TableHeader";
+import { useHistory } from "react-router";
 
-const Dashboard = ({ history }) => {
+const Dashboard = ({ isLoggedIn }) => {
   const [polls, setPolls] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const { isLoggedIn } = props;
+  var history = useHistory();
 
   const fetchPolls = async () => {
     try {
@@ -40,10 +43,11 @@ const Dashboard = ({ history }) => {
 
   if (!either(isNil, isEmpty)(polls)) {
     return (
-      <Container>
+      <Container isLoggedIn={isLoggedIn} >
         <ListPolls 
           data={polls} 
           showPoll={showPoll}
+          isLoggedIn={isLoggedIn}
         />
       </Container>
     );
