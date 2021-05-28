@@ -10,7 +10,7 @@ class VoteTest < ActiveSupport::TestCase
     
     Vote.delete_all
 
-    @vote = Vote.new(user: @user, poll: @poll)
+    @vote = Vote.new(user: @user, poll: @poll, option: 'demo1')
   end
 
   def test_valid_vote_should_be_saved
