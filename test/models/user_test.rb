@@ -22,7 +22,7 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_be_not_be_valid_without_name
     @user.name = ''
     assert_not @user.valid?
-    assert_equal ["First name can't be empty"], @user.errors.full_messages
+    assert_equal ["Name can't be blank"], @user.errors.full_messages
   end
 
   def test_user_should_be_not_be_valid_and_saved_without_email
@@ -30,7 +30,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   
     @user.save
-    assert_equal ["Email can't be empty", 'Email is invalid'],
+    assert_equal ["Email can't be blank", 'Email is invalid'],
                   @user.errors.full_messages
   end
 
@@ -50,7 +50,7 @@ class UserTest < ActiveSupport::TestCase
     test_user = @user.dup
     assert_not test_user.valid?
   
-    assert_equal ['This email has already been taken'],
+    assert_equal ['Email has already been taken'],
                   test_user.errors.full_messages
   end
 
@@ -77,14 +77,14 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_not_be_saved_without_password
     @user.password = nil
     assert_not @user.save
-    assert_equal ["Password can't be empty"],
+    assert_equal ["Password can't be blank"],
                   @user.errors.full_messages
   end
   
   def test_user_should_not_be_saved_without_password_confirmation
     @user.password_confirmation = nil
     assert_not @user.save
-    assert_equal ["Password confirmation can't be empty"],
+    assert_equal ["Password confirmation can't be blank"],
                   @user.errors.full_messages
   end
 
