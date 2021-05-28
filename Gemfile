@@ -55,3 +55,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'react-rails'
 gem 'bcrypt', '~> 3.1.13'
 gem 'rexml', '~> 3.2', '>= 3.2.4'
+gem 'bundler-audit', require: false
+gem 'ruby_audit', require: false
