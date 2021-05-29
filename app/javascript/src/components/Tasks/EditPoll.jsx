@@ -22,7 +22,7 @@ const EditPoll = ({ isLoggedIn }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      await pollsApi.update({ slug, payload: { poll: { title, option1, option2, option3, option4, user_id: userId } } });
+      await pollsApi.update({ slug, payload: { poll: { title, option1, option2, option3, option4, user_id: userId, authorize_owner: true } } });
       setLoading(false);
       history.push("/");
     } catch (error) {

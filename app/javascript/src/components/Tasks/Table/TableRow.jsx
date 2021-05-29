@@ -1,18 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Logger from 'js-logger';
-// import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 const TableRow = ({ data, showPoll, isLoggedIn }) => {
   Logger.info(data);  
   const history = useHistory();
-  
-  // const handleShowPoll = slug => {
-  //   // let history = useHistory();
-  //   console.log("logged", isLoggedIn);
-  //   isLoggedIn ? showPoll(slug) : <Link to="/login"/>;
-  // };
 
   return (
     <tbody className="bg-white divide-y divide-gray-200">

@@ -119,7 +119,7 @@ const ShowPoll = ({ isLoggedIn }) => {
               isVoted && <span className="ml-4">{calculateVotes(pollDetails?.option3)}%</span>
             }
             <button 
-              className={`my-4 p-2 w-3/4 text-l font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 ${pollDetails.option4 == votedOption ? "bg-purple-600 text-white" : ""}`}
+              className={`my-4 p-2 w-3/4 text-l font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 ${pollDetails.option4 == votedOption && "bg-purple-600 text-white"}`}
               onClick={handleVotes}
               disabled={isVoted}
             >
@@ -138,18 +138,22 @@ const ShowPoll = ({ isLoggedIn }) => {
             </Link>
           </div>
         </div>
-        <div className="h-10 bg-bb-env px-2 mt-2 mb-4 ml-2 rounded">
-          <i
-            className="text-2xl text-center transition duration-300
-              ease-in-out ri-delete-bin-5-line hover:text-bb-red mr-2 cursor-pointer"
-            onClick={destroyPoll}
-          ></i>
-          <i
-            className="text-2xl text-center transition duration-300
-              ease-in-out ri-edit-line hover:text-bb-yellow cursor-pointer"
-            onClick={updatePoll}
-          ></i>
-        </div>
+        {
+          pollDetails.user_id == userID && (
+            <div className="h-10 bg-bb-env px-2 mt-2 mb-4 ml-2 rounded">
+              <i
+                className="text-2xl text-center transition duration-300
+                  ease-in-out ri-delete-bin-5-line hover:text-bb-red mr-2 cursor-pointer"
+                onClick={destroyPoll}
+              ></i>
+              <i
+                className="text-2xl text-center transition duration-300
+                  ease-in-out ri-edit-line hover:text-bb-yellow cursor-pointer"
+                onClick={updatePoll}
+              ></i>
+            </div>
+          )
+        }
       </div>
     </Container>
   );
