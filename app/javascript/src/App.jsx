@@ -40,9 +40,15 @@ function App() {
             <Route exact path="/">
               <Dashboard isLoggedIn={isLoggedIn} />
             </Route>
-            <Route exact path="/polls/:slug/show" component={ShowPoll} />
-            <Route exact path="/polls/create" component={CreatePoll} />
-            <Route exact path="/polls/:slug/edit" component={EditPoll} />
+            <Route exact path="/polls/:slug/show">
+              <ShowPoll isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route exact path="/polls/create">
+              <CreatePoll isLoggedIn={isLoggedIn} />
+            </Route>
+            <Route exact path="/polls/:slug/edit">
+              <EditPoll isLoggedIn={isLoggedIn} />
+            </Route>
           </Switch>
         ) : (
           <Switch>

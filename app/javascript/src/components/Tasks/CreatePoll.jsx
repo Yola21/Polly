@@ -5,8 +5,9 @@ import pollsApi from "apis/polls";
 import usersApi from "apis/users";
 import Logger from 'js-logger';
 import PageLoader from '../PageLoader';
+import { useHistory } from "react-router";
 
-const CreatePoll = ({ history }) => {
+const CreatePoll = ({ isLoggedIn }) => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState("");
@@ -15,6 +16,7 @@ const CreatePoll = ({ history }) => {
   const [option2, setOption2] = useState("");
   const [option3, setOption3] = useState("");
   const [option4, setOption4] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -51,7 +53,7 @@ const CreatePoll = ({ history }) => {
   }
 
   return (
-    <Container>
+    <Container isLoggedIn={isLoggedIn} >
       <PollForm
         setTitle={setTitle}
         loading={loading}

@@ -12,7 +12,7 @@ const Dashboard = ({ isLoggedIn }) => {
   const [polls, setPolls] = useState([]);
   const [loading, setLoading] = useState(true);
   // const { isLoggedIn } = props;
-  var history = useHistory();
+  const history = useHistory();
 
   const fetchPolls = async () => {
     try {

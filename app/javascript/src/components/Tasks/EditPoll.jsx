@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import Container from "components/Container";
 import PollForm from "./Form/PollForm";
@@ -7,7 +7,7 @@ import pollsApi from "apis/polls";
 import PageLoader from "components/PageLoader";
 import Logger from 'js-logger';
 
-const EditPoll = ({ history }) => {
+const EditPoll = ({ isLoggedIn }) => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
@@ -17,6 +17,7 @@ const EditPoll = ({ history }) => {
   const [option2, setOption2] = useState("");
   const [option3, setOption3] = useState("");
   const [option4, setOption4] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -59,7 +60,7 @@ const EditPoll = ({ history }) => {
   }
 
   return (
-    <Container>
+    <Container isLoggedIn={isLoggedIn} >
       <PollForm 
         type="update" 
         title={title} 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import Container from "components/Container";
 import PageLoader from "components/PageLoader";
 import pollsApi from "apis/polls";
@@ -7,7 +7,7 @@ import Logger from 'js-logger';
 import votesApi from "../../apis/votes";
 import { getFromLocalStorage } from "../../helpers/storage";
 
-const ShowPoll = ({ history }) => {
+const ShowPoll = ({ isLoggedIn }) => {
   const { slug } = useParams();
   const [pollDetails, setPollDetails] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
@@ -15,6 +15,7 @@ const ShowPoll = ({ history }) => {
   const userID = getFromLocalStorage('authUserId');
   const [isVoted, setIsVoted] = useState(false);
   const [votedOption, setVotedOption] = useState();
+  const history = useHistory();
 
   const fetchPollDetails = async () => {
     try {
@@ -80,7 +81,7 @@ const ShowPoll = ({ history }) => {
 
   console.log(votedOption);
   return (
-    <Container>
+    <Container isLoggedIn={isLoggedIn}>
       <div className="flex justify-between text-bb-gray-600 mt-10">
         <div className="flex-1">
           <div>

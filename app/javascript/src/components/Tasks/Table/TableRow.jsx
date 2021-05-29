@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Logger from 'js-logger';
-import { Redirect } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const TableRow = ({ data, showPoll, isLoggedIn }) => {
   Logger.info(data);  
-  // var history = useHistory();
+  const history = useHistory();
   
   // const handleShowPoll = slug => {
   //   // let history = useHistory();
@@ -21,7 +21,7 @@ const TableRow = ({ data, showPoll, isLoggedIn }) => {
           <td 
             className="px-6 py-4 text-lg font-medium
             leading-5 text-purple-600 whitespace-no-wrap cursor-pointer"
-            onClick={() => isLoggedIn ? showPoll(rowData.slug) : <Redirect to="/login"/> }
+            onClick={() => isLoggedIn ? showPoll(rowData.slug) : history.push("/login") }
           >
             {rowData.title}
           </td>
