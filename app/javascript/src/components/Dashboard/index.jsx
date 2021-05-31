@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { isNil, isEmpty, either } from "ramda";
 import Container from "components/Container";
-import ListPolls from "components/Tasks/ListPolls";
+import ListPolls from "components/Polls/ListPolls";
 import PageLoader from "components/PageLoader";
 import pollsApi from "apis/polls";
 import Logger from 'js-logger';
-import TableHeader from "../Tasks/Table/TableHeader";
+import TableHeader from "../Polls/Table/TableHeader";
 import { useHistory } from "react-router";
 
 const Dashboard = ({ isLoggedIn }) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Container from "components/Container";
-import PollForm from "components/Tasks/Form/PollForm";
+import PollForm from "components/Polls/Form/PollForm";
 import pollsApi from "apis/polls";
 import usersApi from "apis/users";
 import Logger from 'js-logger';
