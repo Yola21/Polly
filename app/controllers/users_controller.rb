@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user_using_x_auth_token, only: [:index]
 
   def index
-    users = User.all.as_json(only: %i[id name])
+    users = policy_scope(User)
     render status: :ok, json: { users: users }
   end
 
