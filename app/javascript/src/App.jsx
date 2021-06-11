@@ -10,7 +10,6 @@ import EditPoll from './components/Polls/EditPoll';
 import Signup from './components/Authentication/Signup';
 import Login from "./components/Authentication/Login";
 import { either, isEmpty, isNil } from "ramda";
-// import PrivateRoute from './components/Common/PrivateRoute';
 import { getFromLocalStorage } from './helpers/storage';
 
 function App() {
@@ -57,12 +56,6 @@ function App() {
             </Route>
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
-            {/* <PrivateRoute
-              path="/"
-              redirectRoute="/login"
-              condition={isLoggedIn}
-              component={Dashboard}
-            /> */}
           </Switch>
         )
       }
