@@ -15,13 +15,11 @@ class Poll < ApplicationRecord
     itr = 1
     title_slug = title.parameterize
     temp_slug = Poll.where("slug LIKE ?", "#{title_slug}").exists? 
-    if(!temp_slug){
+    if(!temp_slug)
       self.slug = title_slug
-    }
-    else{
+    else
       itr += 1
       self.slug = "#{title_slug}-#{itr}"
-    }
     end
 #     loop do
 #       title_slug = title.parameterize
