@@ -13,12 +13,22 @@ class Poll < ApplicationRecord
 
   def set_slug
     itr = 1
-    loop do
-      title_slug = title.parameterize
-      slug_candidate = itr > 1 ? "#{title_slug}-#{itr}" : title_slug
-      break self.slug = slug_candidate unless Poll.exists?(slug: slug_candidate)
+    title_slug = title.parameterize
+    temp_slug = Poll.where("slug LIKE ?", "#{title_slug}").exists? 
+    if(!temp_slug){
+      self.slug = title_slug
+    }
+    else{
       itr += 1
+      self.slug = "#{title_slug}-#{itr}"
+    }
     end
+#     loop do
+#       title_slug = title.parameterize
+#       slug_candidate = itr > 1 ? "#{title_slug}-#{itr}" : title_slug
+#       break self.slug = slug_candidate unless Poll.exists?(slug: slug_candidate)
+#       itr += 1
+#     end
   end
 
   def slug_not_changed
