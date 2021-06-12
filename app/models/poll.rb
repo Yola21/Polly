@@ -21,12 +21,6 @@ class Poll < ApplicationRecord
       itr += 1
       self.slug = "#{title_slug}-#{itr}"
     end
-#     loop do
-#       title_slug = title.parameterize
-#       slug_candidate = itr > 1 ? "#{title_slug}-#{itr}" : title_slug
-#       break self.slug = slug_candidate unless Poll.exists?(slug: slug_candidate)
-#       itr += 1
-#     end
   end
 
   def slug_not_changed
